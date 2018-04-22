@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">app_novitta</string>
+    <string name="action_pesquisa"></string>
+    <string name="action_relatorio"></string>
+    <string name="action_limpar"></string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main3">Main3Activity</string>
+    <string name="title_activity_main4">Main4Activity</string>
+</resources>
