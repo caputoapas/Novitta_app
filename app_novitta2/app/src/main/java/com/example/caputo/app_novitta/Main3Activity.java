@@ -1,16 +1,22 @@
 package com.example.caputo.app_novitta;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class Main3Activity extends AppCompatActivity {
+
+    private ListView lista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +25,15 @@ public class Main3Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        BancoController crud = new BancoController(getBaseContext());
+        Cursor cursor = crud.carregaDados();
 
+        String[] nomeCampos = new String[] {CriaBanco.TIPO, CriaBanco.VOTO,CriaBanco.DATA};
+        int[] idViews = new int[] {R.id.data, R.id.data2, R.id.data3};
+//
+//        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),R.layout.content_main3,cursor,nomeCampos,idViews, 0);
+//        lista = (ListView)findViewById(R.id.listView);
+//        lista.setAdapter(adaptador);
     }
 
     public void paginaRelatorio(){
