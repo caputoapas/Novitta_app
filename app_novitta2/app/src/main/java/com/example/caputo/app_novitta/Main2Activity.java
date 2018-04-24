@@ -1,5 +1,6 @@
 package com.example.caputo.app_novitta;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,13 +22,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 
+
 public class Main2Activity extends AppCompatActivity {
     private ImageView imagem;
     private Button voltar;
     private TextView tipoVoto;
     SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
-    BancoController crud = new BancoController(getBaseContext());
+    //BancoController crud = new BancoController(getBaseContext());
 
    final List<Pesquisa> Pessoas = new ArrayList<Pesquisa>();
 
@@ -91,7 +93,7 @@ public class Main2Activity extends AppCompatActivity {
         }else if (r.equals("VISITANTE"))
             tp = TipoPessoa.visitante;
         else
-            paginaInicial();
+            finish();
 
         tipoVoto = (TextView)findViewById(R.id.Tipo);
 
@@ -135,52 +137,94 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void Satisfeito (View v){
+        String resultado = "";
+
         String tipo = String.valueOf(tp);
         String voto = String.valueOf(TipoSatisfacao.satisfeito);
         String data = formataData.format(date);
 
-        String resultado = crud.insereDado(tipo,voto,data);
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
+        values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
+        values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
+
+        long newRowId = db.insert(PostContract.PostEntry.TABLE_NAME, null, values);
+
+        if (newRowId ==-1)
+            resultado =  "Erro ao inserir registro";
+        else
+            resultado = "Registro Inserido com sucesso";
 
         Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
-//        Pesquisa p = new Pesquisa();
-//
-//        p.setSatisfacao(TipoSatisfacao.satisfeito);
-//        p.setTipos(tp);
-//        p.setData(formataData.format(date));
-//
-//        Pessoas.add(p);
-
-        paginaInicial();
+        finish();
     }
 
     public void Insatisfeito(View v){
+
+        String resultado = "";
+
         String tipo = String.valueOf(tp);
-        String voto = String.valueOf(TipoSatisfacao.satisfeito);
+        String voto = String.valueOf(TipoSatisfacao.insatisfeito);
         String data = formataData.format(date);
 
-        String resultado = crud.insereDado(tipo,voto,data);
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
+        values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
+        values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
+
+        long newRowId = db.insert(PostContract.PostEntry.TABLE_NAME, null, values);
+
+        if (newRowId ==-1)
+            resultado =  "Erro ao inserir registro";
+        else
+            resultado = "Registro Inserido com sucesso";
 
         Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
-
-        paginaInicial();
+        finish();
     }
 
     public void Neutro(View v){
+
+        String resultado = "";
+
         String tipo = String.valueOf(tp);
         String voto = String.valueOf(TipoSatisfacao.satisfeito);
         String data = formataData.format(date);
 
-        String resultado = crud.insereDado(tipo,voto,data);
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
+        values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
+        values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
+
+        long newRowId = db.insert(PostContract.PostEntry.TABLE_NAME, null, values);
+
+        if (newRowId ==-1)
+            resultado =  "Erro ao inserir registro";
+        else
+            resultado = "Registro Inserido com sucesso";
 
         Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
-
-        paginaInicial();
+        finish();
     }
 
     public void paginaInicial(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
     public void paginaRelatorio(){
         Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);

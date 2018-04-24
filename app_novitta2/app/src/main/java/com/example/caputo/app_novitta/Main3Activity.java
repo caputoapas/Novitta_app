@@ -25,11 +25,10 @@ public class Main3Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BancoController crud = new BancoController(getBaseContext());
-        Cursor cursor = crud.carregaDados();
-
-        String[] nomeCampos = new String[] {CriaBanco.TIPO, CriaBanco.VOTO,CriaBanco.DATA};
-        int[] idViews = new int[] {R.id.data, R.id.data2, R.id.data3};
+//        BancoController crud = new BancoController(getBaseContext());
+//        Cursor cursor = crud.carregaDados();
+//
+//        int[] idViews = new int[] {R.id.data, R.id.data2, R.id.data3};
 //
 //        SimpleCursorAdapter adaptador = new SimpleCursorAdapter(getBaseContext(),R.layout.content_main3,cursor,nomeCampos,idViews, 0);
 //        lista = (ListView)findViewById(R.id.listView);
