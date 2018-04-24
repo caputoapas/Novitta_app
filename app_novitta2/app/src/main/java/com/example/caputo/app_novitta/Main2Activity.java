@@ -1,10 +1,8 @@
 package com.example.caputo.app_novitta;
 
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.BaseColumns;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,10 +16,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
-
+// TELA CARINHAS/VOTO
 
 public class Main2Activity extends AppCompatActivity {
     private ImageView imagem;
@@ -29,7 +26,6 @@ public class Main2Activity extends AppCompatActivity {
     private TextView tipoVoto;
     SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
-    //BancoController crud = new BancoController(getBaseContext());
 
    final List<Pesquisa> Pessoas = new ArrayList<Pesquisa>();
 
@@ -46,7 +42,8 @@ public class Main2Activity extends AppCompatActivity {
         insatisfeito
     }
 
-    public class Pesquisa{
+    public static class Pesquisa{
+        public int _id;
         public TipoPessoa tipos;
         public TipoSatisfacao satisfacao;
         public String data;
@@ -73,6 +70,14 @@ public class Main2Activity extends AppCompatActivity {
 
         public void setData(String data) {
             this.data = data;
+        }
+
+        public int get_id() {
+            return _id;
+        }
+
+        public void set_id(int _id) {
+            this._id = _id;
         }
     }
 
@@ -107,7 +112,7 @@ public class Main2Activity extends AppCompatActivity {
         voltar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                paginaInicial();
+                finish();
             }
         });
 
@@ -220,11 +225,6 @@ public class Main2Activity extends AppCompatActivity {
         finish();
     }
 
-    public void paginaInicial(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     public void paginaRelatorio(){
         Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);
@@ -246,8 +246,7 @@ public class Main2Activity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_pesquisa) {
-
-            paginaInicial();
+            finish();
         }
         if (id == R.id.action_relatorio) {
             paginaRelatorio();
@@ -259,7 +258,5 @@ public class Main2Activity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-
 
 }

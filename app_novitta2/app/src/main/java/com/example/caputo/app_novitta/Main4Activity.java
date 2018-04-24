@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+// TELA SPLASH
+
 public class Main4Activity extends AppCompatActivity implements Runnable {
 
     @Override
@@ -19,11 +21,8 @@ public class Main4Activity extends AppCompatActivity implements Runnable {
         setSupportActionBar(toolbar);
 
         Handler splash = new Handler();
-        splash.postDelayed(Main4Activity.this, 3000);
-
-
+        splash.postDelayed(Main4Activity.this, 2000);
     }
-
 
     public void run()
     {

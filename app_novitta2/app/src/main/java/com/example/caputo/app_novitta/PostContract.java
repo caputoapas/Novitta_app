@@ -2,6 +2,8 @@ package com.example.caputo.app_novitta;
 
 import android.provider.BaseColumns;
 
+// CLASSE ESPELHO DA TABELA NO BANCO
+
 public final class PostContract {
     private PostContract() {}
 

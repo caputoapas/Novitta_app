@@ -9,6 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+// TELA PRINCIPAL EXPOSITOR/VISITANTE
+
 public class MainActivity extends AppCompatActivity {
     private ImageView imagem;
 
@@ -33,10 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 paginaVotoV();
             }
         });
-
-
     }
-
 
     public void paginaInicial(){
         Intent intent = new Intent(this, MainActivity.class);
@@ -46,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, Main3Activity.class);
         startActivity(intent);
     }
-
 
     public void paginaVotoE(){
         String nome = "EXPOSITOR";
@@ -65,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_pesquisa) {
-            paginaInicial();
+
         }
         if (id == R.id.action_relatorio) {
             paginaRelatorio();
