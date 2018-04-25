@@ -183,9 +183,8 @@
                         android:src="@mipmap/ic_visitante" />
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp" />
-
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
                     <TextView
                         android:id="@+id/msatisfeitoR2"
                         android:text="V1"
@@ -259,8 +258,9 @@
                         android:src="@mipmap/ic_expositor" />
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
+
                     <TextView
                         android:id="@+id/msatisfeitoR3"
                         android:text="V1"
@@ -324,8 +324,8 @@
                         android:src="@mipmap/ic_visitante" />
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
 
                     <TextView
                         android:id="@+id/msatisfeitoR4"
@@ -400,8 +400,8 @@
                         android:src="@mipmap/ic_expositor" />
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
 
                     <TextView
                         android:id="@+id/msatisfeitoR5"
@@ -466,8 +466,8 @@
                         android:src="@mipmap/ic_visitante" />
 
                     <ImageView
-                        android:layout_width="14dp"
-                        android:layout_height="14dp" />
+                        android:layout_width="10dp"
+                        android:layout_height="10dp" />
 
                     <TextView
                         android:id="@+id/msatisfeitoR6"
