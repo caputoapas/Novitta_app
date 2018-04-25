@@ -4,16 +4,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +41,7 @@ public class Main3Activity extends AppCompatActivity {
                 +  PostContract.PostEntry.COLUMN_NAME_VOTO + "='satisfeito'";
 
         //argumeos da clausula where
-        String[] selectionArgs = { PostContract.PostEntry.COLUMN_NAME_TIPO+"='expositor'", PostContract.PostEntry.COLUMN_NAME_VOTO +"='satisfeito'" };
+        //String[] selectionArgs = { PostContract.PostEntry.COLUMN_NAME_TIPO+"='expositor'", PostContract.PostEntry.COLUMN_NAME_VOTO +"='satisfeito'" };
 
         //ordenacao dos dados
         String sortOrder =
@@ -57,7 +51,7 @@ public class Main3Activity extends AppCompatActivity {
                 PostContract.PostEntry.TABLE_NAME,
                 projection,
                 selection,
-                selectionArgs,
+                null,
                 null,
                 null,
                 sortOrder);
@@ -84,14 +78,47 @@ public class Main3Activity extends AppCompatActivity {
 
     private Main2Activity.Pesquisa fillPesquisa(Cursor c) {
         Main2Activity.Pesquisa p = new Main2Activity.Pesquisa();
+        String tP = c.getString(1);
+        String tS = c.getString(2);
+
         p.set_id(c.getInt(0));
-//        p.setTipos(c.getString(1));
-//        p.setSatisfacao(c.getString(2));
+        p.setTipos(ConverterDadosPesquisaPessoa(tP));
+        p.setSatisfacao(ConverterDadosPesquisaSatisfacao(tS));
         p.setData(c.getString(3));
-        c.close();
+        String t = c.getString(1);
+       // c.close();
         return p;
     }
 
+    public Main2Activity.TipoSatisfacao ConverterDadosPesquisaSatisfacao(String tipoSatisfacao){
+        Main2Activity.Pesquisa _p = new Main2Activity.Pesquisa();
+
+        switch (tipoSatisfacao) {
+            case "muito_satisfeito": _p.setSatisfacao(Main2Activity.TipoSatisfacao.muito_satisfeito);
+            break;
+            case "satisfeito": _p.setSatisfacao(Main2Activity.TipoSatisfacao.satisfeito);
+                break;
+            case "neutro": _p.setSatisfacao(Main2Activity.TipoSatisfacao.neutro);
+                break;
+            case "insatisfeito": _p.setSatisfacao(Main2Activity.TipoSatisfacao.insatisfeito);
+                break;
+            case "muito_insatisfeito": _p.setSatisfacao(Main2Activity.TipoSatisfacao.muito_insatisfeito);
+                break;
+        }
+        return _p.getSatisfacao();
+    }
+    public Main2Activity.TipoPessoa ConverterDadosPesquisaPessoa(String tipoPessoa){
+        Main2Activity.Pesquisa _p = new Main2Activity.Pesquisa();
+
+        switch (tipoPessoa) {
+            case "expositor": _p.setTipos(Main2Activity.TipoPessoa.expositor);
+                break;
+            case "visitante": _p.setTipos(Main2Activity.TipoPessoa.visitante);
+                break;
+
+        }
+        return _p.getTipos();
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

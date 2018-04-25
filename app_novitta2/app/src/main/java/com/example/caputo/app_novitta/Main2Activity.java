@@ -37,9 +37,11 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public enum TipoSatisfacao{
+        muito_satisfeito,
         satisfeito,
         neutro,
-        insatisfeito
+        insatisfeito,
+        muito_insatisfeito
     }
 
     public static class Pesquisa{
