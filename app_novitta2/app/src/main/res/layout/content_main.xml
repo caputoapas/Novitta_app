@@ -8,25 +8,22 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <FrameLayout
-        android:layout_width="200dp"
-        android:layout_height="500dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@mipmap/ic_notttta" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:background="@android:color/background_light">
-
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="120dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
-                android:src="@mipmap/ic_novita" />
 
             <ImageView
                 android:id="@+id/expositor"
@@ -41,14 +38,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="20dp"
+                android:layout_margin="2dp"
                 android:src="@mipmap/ic_visitante" />
 
 
         </LinearLayout>
+    </LinearLayout>
 
 
-    </FrameLayout>
 
 
 </RelativeLayout>
