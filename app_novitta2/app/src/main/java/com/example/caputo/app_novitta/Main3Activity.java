@@ -1,9 +1,11 @@
 package com.example.caputo.app_novitta;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
@@ -83,7 +85,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public EditText data11;
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -141,17 +143,15 @@ public class Main3Activity extends AppCompatActivity {
         imagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fillAllLists();
+                LimparView();
                 fillView();
             }
         });
+        LimparView();
         fillAllLists();
-        fillView();
     }
 
-
-
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = VERSION_CODES.M)
     public void fillView(){
 
         String d1 = String.valueOf(data11.getText());
@@ -162,7 +162,8 @@ public class Main3Activity extends AppCompatActivity {
         viewVisitantes(d1,d2,d3);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("NewApi")
+    @RequiresApi(api = VERSION_CODES.M)
     public void viewExpositores(String d1, String d2, String d3){
 
         Expositores.forEach(n -> { if(n.getData().equals(d1)) {
@@ -229,7 +230,8 @@ public class Main3Activity extends AppCompatActivity {
         minsatisfeitoR5.setText(String.valueOf(mIns5));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @SuppressLint("NewApi")
+    @RequiresApi(api = VERSION_CODES.M)
     public void viewVisitantes(String d1, String d2, String d3){
 
         Visitantes.forEach(n -> { if(n.getData().equals(d1)) {
@@ -296,13 +298,13 @@ public class Main3Activity extends AppCompatActivity {
         minsatisfeitoR6.setText(String.valueOf(mIns6));
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = VERSION_CODES.M)
     public void fillAllLists(){
         fillList(1); //expositor
         fillList(2); //visitante
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = VERSION_CODES.M)
     public void fillList(int tipo){
         PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -349,7 +351,7 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = VERSION_CODES.M)
     public void EscolheLista(final int tipo){
         switch (tipo){
             case 1:
@@ -359,6 +361,49 @@ public class Main3Activity extends AppCompatActivity {
                 Visitantes.add(_pesquisa);
                 break;
         }
+    }
+
+    public void LimparView(){
+        msatisfeitoR1.setText(""); mS1 = 0;
+        msatisfeitoR2.setText(""); mS2 = 0;
+        msatisfeitoR3.setText(""); mS3 = 0;
+        msatisfeitoR4.setText(""); mS4 = 0;
+        msatisfeitoR5.setText(""); mS5 = 0;
+        msatisfeitoR6.setText(""); mS6 = 0;
+
+        satisfeitoR1.setText(""); s1 = 0;
+        satisfeitoR2.setText(""); s2 = 0;
+        satisfeitoR3.setText(""); s3 = 0;
+        satisfeitoR4.setText(""); s4 = 0;
+        satisfeitoR5.setText(""); s5 = 0;
+        satisfeitoR6.setText(""); s6 = 0;
+
+        neutroR1.setText(""); n1 = 0;
+        neutroR2.setText(""); n2 = 0;
+        neutroR3.setText(""); n3 = 0;
+        neutroR4.setText(""); n4 = 0;
+        neutroR5.setText(""); n5 = 0;
+        neutroR6.setText(""); n6 = 0;
+
+        insatisfeitoR1.setText(""); ins1 = 0;
+        insatisfeitoR2.setText(""); ins2 = 0;
+        insatisfeitoR3.setText(""); ins3 = 0;
+        insatisfeitoR4.setText(""); ins4 = 0;
+        insatisfeitoR5.setText(""); ins5 = 0;
+        insatisfeitoR6.setText(""); ins6 = 0;
+
+        minsatisfeitoR1.setText(""); mIns1 = 0;
+        minsatisfeitoR2.setText(""); mIns2 = 0;
+        minsatisfeitoR3.setText(""); mIns3 = 0;
+        minsatisfeitoR4.setText(""); mIns4 = 0;
+        minsatisfeitoR5.setText(""); mIns5 = 0;
+        minsatisfeitoR6.setText(""); mIns6 = 0;
+
+    }
+
+    public void LimparList(){
+        Expositores.clear();
+        Visitantes.clear();
     }
 
     private Main2Activity.Pesquisa fillPesquisa(Cursor c) {
@@ -446,8 +491,10 @@ public class Main3Activity extends AppCompatActivity {
                 PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
                 SQLiteDatabase db = mDbHelper.getReadableDatabase();
                 /** irá remover todos os registros **/
-//                db.execSQL(String.format("DELETE FROM ", "votacao"));
-//                db.execSQL("VACUUM");
+                db.execSQL(String.format("DELETE FROM votacao"));
+                db.execSQL("VACUUM");
+                LimparList();
+                LimparView();
 
                 Toast.makeText(Main3Activity.this, "Limpeza Concluida", Toast.LENGTH_SHORT).show();
             }
