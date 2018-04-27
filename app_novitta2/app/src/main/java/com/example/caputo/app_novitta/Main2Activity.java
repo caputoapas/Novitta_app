@@ -1,8 +1,10 @@
 package com.example.caputo.app_novitta;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -27,7 +29,12 @@ public class Main2Activity extends AppCompatActivity {
     SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Date date = new Date();
 
-   final List<Pesquisa> Pessoas = new ArrayList<Pesquisa>();
+
+    //atributo da classe Alerta.
+    public AlertDialog alerta;
+    int rLimpa;
+
+    final List<Pesquisa> Pessoas = new ArrayList<Pesquisa>();
 
     TipoPessoa tp = null;
 
@@ -110,11 +117,11 @@ public class Main2Activity extends AppCompatActivity {
             tipoVoto.setText(tipo);
         }
 
-        voltar = (Button)findViewById(R.id.butonVoltar);
-        voltar.setOnClickListener(new View.OnClickListener() {
+        imagem = (ImageView) findViewById(R.id.m_satisfeito);
+        imagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Muito_Satisfeito(v);
             }
         });
 
@@ -126,6 +133,14 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
+        imagem = (ImageView) findViewById(R.id.neutro);
+        imagem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Neutro(v);
+            }
+        });
+
         imagem = (ImageView) findViewById(R.id.insatisfeito);
         imagem.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,13 +149,49 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
 
-        imagem = (ImageView) findViewById(R.id.neutro);
+        imagem = (ImageView) findViewById(R.id.m_insatisfeito);
         imagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Neutro(v);
+                Muito_Insatisfeito(v);
             }
         });
+
+        voltar = (Button)findViewById(R.id.butonVoltar);
+        voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    public void Muito_Satisfeito (View v){
+        String resultado = "";
+
+        String tipo = String.valueOf(tp);
+        String voto = String.valueOf(TipoSatisfacao.muito_satisfeito);
+        String data = formataData.format(date);
+
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
+        values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
+        values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
+
+        long newRowId = db.insert(PostContract.PostEntry.TABLE_NAME, null, values);
+
+        if (newRowId ==-1)
+            resultado =  "Erro ao inserir registro";
+        else
+            resultado = "Registro Inserido com sucesso";
+
+        Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+        finish();
     }
 
     public void Satisfeito (View v){
@@ -156,6 +207,34 @@ public class Main2Activity extends AppCompatActivity {
 
         ContentValues values = new ContentValues();
 
+        values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
+        values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
+        values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
+
+        long newRowId = db.insert(PostContract.PostEntry.TABLE_NAME, null, values);
+
+        if (newRowId ==-1)
+            resultado =  "Erro ao inserir registro";
+        else
+            resultado = "Registro Inserido com sucesso";
+
+        Toast.makeText(getApplicationContext(), resultado, Toast.LENGTH_LONG).show();
+        finish();
+    }
+
+    public void Neutro(View v){
+
+        String resultado = "";
+
+        String tipo = String.valueOf(tp);
+        String voto = String.valueOf(TipoSatisfacao.neutro);
+        String data = formataData.format(date);
+
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
         values.put(PostContract.PostEntry.COLUMN_NAME_TIPO, tipo);
         values.put(PostContract.PostEntry.COLUMN_NAME_VOTO, voto);
         values.put(PostContract.PostEntry.COLUMN_NAME_DATA, data);
@@ -199,12 +278,12 @@ public class Main2Activity extends AppCompatActivity {
         finish();
     }
 
-    public void Neutro(View v){
+    public void Muito_Insatisfeito(View v){
 
         String resultado = "";
 
         String tipo = String.valueOf(tp);
-        String voto = String.valueOf(TipoSatisfacao.satisfeito);
+        String voto = String.valueOf(TipoSatisfacao.muito_insatisfeito);
         String data = formataData.format(date);
 
         PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
@@ -254,11 +333,41 @@ public class Main2Activity extends AppCompatActivity {
             paginaRelatorio();
         }
         if (id == R.id.action_limpar) {
-
-            return true;
+            LimparDados();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    private void LimparDados() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Limpar Dados");
+        //define a mensagem
+        builder.setMessage("Deseja Limpar todos os Dados ?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                /** irá remover todos os registros **/
+//                db.execSQL(String.format("DELETE FROM ", "votacao"));
+//                db.execSQL("VACUUM");
+
+                Toast.makeText(Main2Activity.this, "Limpeza Concluida", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(Main2Activity.this, "Limpeza Cancelada", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 }

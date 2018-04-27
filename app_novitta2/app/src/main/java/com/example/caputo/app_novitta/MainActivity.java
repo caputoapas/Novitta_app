@@ -1,18 +1,26 @@
 package com.example.caputo.app_novitta;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 // TELA PRINCIPAL EXPOSITOR/VISITANTE
 
 public class MainActivity extends AppCompatActivity {
     private ImageView imagem;
+
+    //atributo da classe Alerta.
+    public AlertDialog alerta;
+    int rLimpa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,11 +93,41 @@ public class MainActivity extends AppCompatActivity {
             paginaRelatorio();
         }
         if (id == R.id.action_limpar) {
-
-            return true;
+            LimparDados();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    private void LimparDados() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Limpar Dados");
+        //define a mensagem
+        builder.setMessage("Deseja Limpar todos os Dados ?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+                SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+                /** irá remover todos os registros **/
+//                db.execSQL(String.format("DELETE FROM ", "votacao"));
+//                db.execSQL("VACUUM");
+
+                Toast.makeText(MainActivity.this, "Limpeza Concluida", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                Toast.makeText(MainActivity.this, "Limpeza Cancelada", Toast.LENGTH_SHORT).show();
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 
 }
