@@ -1,12 +1,14 @@
 package com.example.caputo.app_novitta;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
+import android.service.autofill.Dataset;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,12 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.Toast.*;
+import static com.example.caputo.app_novitta.PostContract.PostEntry.COLUMN_NAME_DATA;
 
 //TELA DE RELATORIOS
 
@@ -37,6 +45,11 @@ public class Main3Activity extends AppCompatActivity {
     //List dos visitantes
     List<Main2Activity.Pesquisa> Visitantes = new ArrayList<>();
 
+    //List das datas contidas no banco
+    //List<Main2Activity.Pesquisa> Datas = new ArrayList<>();
+    List<String> Datas = new ArrayList<>();
+
+
     //grid data1
     public TextView msatisfeitoR1; int mS1 = 0;
     public TextView satisfeitoR1; int s1 = 0;
@@ -51,7 +64,7 @@ public class Main3Activity extends AppCompatActivity {
     public TextView minsatisfeitoR2; int mIns2 = 0;
 
     //grid data2
-    public TextView msatisfeitoR3; int mS3 = 0;
+    /*public TextView msatisfeitoR3; int mS3 = 0;
     public TextView satisfeitoR3; int s3 = 0;
     public TextView neutroR3; int n3 = 0;
     public TextView insatisfeitoR3; int ins3 = 0;
@@ -74,17 +87,23 @@ public class Main3Activity extends AppCompatActivity {
     public TextView satisfeitoR6; int s6 = 0;
     public TextView neutroR6; int n6 = 0;
     public TextView insatisfeitoR6; int ins6 = 0;
-    public TextView minsatisfeitoR6; int mIns6 = 0;
+    public TextView minsatisfeitoR6; int mIns6 = 0;*/
 
 
-    public TextView data1; String d1="";
-    public TextView data2; String d2="";
-    public TextView data3; String d3="";
+    //public TextView data1;
+    //String d1="";
+    /*public TextView data2; String d2="";
+    public TextView data3; String d3="";*/
 
     public ImageView imagem;
 
-    public EditText data11;
+    //public EditText data11;
 
+    // istancia uma listBox das datas que tem no banco para realizar a pesquisa (no android a ListBox é chamada de Spinner)
+    Spinner datas;
+    String[] itens;
+
+    @TargetApi(VERSION_CODES.O)
     @RequiresApi(api = VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,76 +114,122 @@ public class Main3Activity extends AppCompatActivity {
 
         msatisfeitoR1 = (TextView) findViewById(R.id.msatisfeitoR1);
         msatisfeitoR2 = (TextView) findViewById(R.id.msatisfeitoR2);
-        msatisfeitoR3 = (TextView) findViewById(R.id.msatisfeitoR3);
+
+        /*msatisfeitoR3 = (TextView) findViewById(R.id.msatisfeitoR3);
         msatisfeitoR4 = (TextView) findViewById(R.id.msatisfeitoR4);
         msatisfeitoR5 = (TextView) findViewById(R.id.msatisfeitoR5);
         msatisfeitoR6 = (TextView) findViewById(R.id.msatisfeitoR6);
-
+*/
         satisfeitoR1 = (TextView) findViewById(R.id.satisfeitoR1);
         satisfeitoR2 = (TextView) findViewById(R.id.satisfeitoR2);
-        satisfeitoR3 = (TextView) findViewById(R.id.satisfeitoR3);
+
+  /*      satisfeitoR3 = (TextView) findViewById(R.id.satisfeitoR3);
         satisfeitoR4 = (TextView) findViewById(R.id.satisfeitoR4);
         satisfeitoR5 = (TextView) findViewById(R.id.satisfeitoR5);
         satisfeitoR6 = (TextView) findViewById(R.id.satisfeitoR6);
-
+*/
         neutroR1 = (TextView) findViewById(R.id.neutroR1);
         neutroR2 = (TextView) findViewById(R.id.neutroR2);
-        neutroR3 = (TextView) findViewById(R.id.neutroR3);
+
+  /*      neutroR3 = (TextView) findViewById(R.id.neutroR3);
         neutroR4 = (TextView) findViewById(R.id.neutroR4);
         neutroR5 = (TextView) findViewById(R.id.neutroR5);
         neutroR6 = (TextView) findViewById(R.id.neutroR6);
-
+*/
         insatisfeitoR1 = (TextView) findViewById(R.id.insatisfeitoR1);
         insatisfeitoR2 = (TextView) findViewById(R.id.insatisfeitoR2);
-        insatisfeitoR3 = (TextView) findViewById(R.id.insatisfeitoR3);
+
+  /*      insatisfeitoR3 = (TextView) findViewById(R.id.insatisfeitoR3);
         insatisfeitoR4 = (TextView) findViewById(R.id.insatisfeitoR4);
         insatisfeitoR5 = (TextView) findViewById(R.id.insatisfeitoR5);
         insatisfeitoR6 = (TextView) findViewById(R.id.insatisfeitoR6);
-
+*/
         minsatisfeitoR1 = (TextView) findViewById(R.id.minsatisfeitoR1);
         minsatisfeitoR2 = (TextView) findViewById(R.id.minsatisfeitoR2);
-        minsatisfeitoR3 = (TextView) findViewById(R.id.minsatisfeitoR3);
+
+  /*      minsatisfeitoR3 = (TextView) findViewById(R.id.minsatisfeitoR3);
         minsatisfeitoR4 = (TextView) findViewById(R.id.minsatisfeitoR4);
         minsatisfeitoR5 = (TextView) findViewById(R.id.minsatisfeitoR5);
         minsatisfeitoR6 = (TextView) findViewById(R.id.minsatisfeitoR6);
-
+*/
         //data1 = (TextView) findViewById(R.id.data1);
-        data2 = (TextView) findViewById(R.id.data2);
+
+  /*      data2 = (TextView) findViewById(R.id.data2);
         data3 = (TextView) findViewById(R.id.data3);
+*/
+        //data11 = (EditText) findViewById(R.id.data11) ;
 
-        data11 = (EditText) findViewById(R.id.data11) ;
+        // constrói e alimenta a listBox (spinner) e pega a data que o usuário deseja para fazer a pesquisa
+        datas = (Spinner) findViewById(R.id.spinner_data);
+        itens = getResources().getStringArray(R.array.teste_de_spinner);
 
-        d1 = data11.getText().toString();
-        d2 = data2.getText().toString();
-        d3 = data3.getText().toString();
+        fillAllListsSpinner();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, Datas);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(), android.R.layout.simple_spinner_item, itens);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        datas.setAdapter(adapter);
+
+        datas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                // no lugar do Toast abiaxo, colocar a função do cursor para realizar a pesquisa.
+                Toast.makeText(Main3Activity.this, Datas.get(position), Toast.LENGTH_LONG).show();
+                //makeText(getApplicationContext(), Datas.get(position), LENGTH_LONG).show();
+                //makeText(getApplicationContext(), itens[position], LENGTH_LONG).show();
+
+                LimparView();
+
+                // alimenta os votos de acordo com a data escolhida na Spinner pelo usuário
+                fillView(Datas.get(position));
+                //fillView(itens[position]);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        //// fim da ListBox (Spinner)
+
+        //d1 = data11.getText().toString();
+        /*d2 = data2.getText().toString();
+        d3 = data3.getText().toString();*/
 
         imagem = (ImageView) findViewById(R.id.logo);
 
-        imagem.setOnClickListener(new View.OnClickListener() {
+        /*imagem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LimparView();
-                fillView();
+                //fillView();
             }
-        });
+        });*/
         LimparView();
         fillAllLists();
+        //LimparView();
+        //fillAllListsSpinner();
     }
 
     @RequiresApi(api = VERSION_CODES.M)
-    public void fillView(){
+    public void fillView(String data){
 
-        String d1 = String.valueOf(data11.getText());
-        String d2 = String.valueOf(data2.getText());
-        String d3 = String.valueOf(data3.getText());
+        String d1 = String.valueOf(data);
+        /*String d2 = String.valueOf(data2.getText());
+        String d3 = String.valueOf(data3.getText());*/
 
-        viewExpositores(d1,d2,d3);
-        viewVisitantes(d1,d2,d3);
+
+        viewExpositores(d1);
+        viewVisitantes(d1);
+        /*viewExpositores(d1,d2,d3);
+        viewVisitantes(d1,d2,d3);*/
     }
 
     @SuppressLint("NewApi")
     @RequiresApi(api = VERSION_CODES.M)
-    public void viewExpositores(String d1, String d2, String d3){
+    public void viewExpositores(String d1){
 
         Expositores.forEach(n -> { if(n.getData().equals(d1)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
@@ -181,7 +246,8 @@ public class Main3Activity extends AppCompatActivity {
         }
         });
 
-        Expositores.forEach(n -> { if(n.getData().equals(d2)) {
+
+        /*Expositores.forEach(n -> { if(n.getData().equals(d2)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
                 mS3++;
             }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
@@ -194,9 +260,9 @@ public class Main3Activity extends AppCompatActivity {
                 mIns3++;
             }
         }
-        });
+        });*/
 
-        Expositores.forEach(n -> { if(n.getData().equals(d3)) {
+        /*Expositores.forEach(n -> { if(n.getData().equals(d3)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
                 mS5++;
             }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
@@ -209,7 +275,7 @@ public class Main3Activity extends AppCompatActivity {
                 mIns5++;
             }
         }
-        });
+        });*/
 
         msatisfeitoR1.setText(String.valueOf(mS1));
         satisfeitoR1.setText(String.valueOf(s1));
@@ -217,7 +283,7 @@ public class Main3Activity extends AppCompatActivity {
         insatisfeitoR1.setText(String.valueOf(ins1));
         minsatisfeitoR1.setText(String.valueOf(mIns1));
 
-        msatisfeitoR3.setText(String.valueOf(mS3));
+        /*msatisfeitoR3.setText(String.valueOf(mS3));
         satisfeitoR3.setText(String.valueOf(s3));
         neutroR3.setText(String.valueOf(n3));
         insatisfeitoR3.setText(String.valueOf(ins3));
@@ -227,12 +293,12 @@ public class Main3Activity extends AppCompatActivity {
         satisfeitoR5.setText(String.valueOf(s5));
         neutroR5.setText(String.valueOf(n5));
         insatisfeitoR5.setText(String.valueOf(ins5));
-        minsatisfeitoR5.setText(String.valueOf(mIns5));
+        minsatisfeitoR5.setText(String.valueOf(mIns5));*/
     }
 
     @SuppressLint("NewApi")
     @RequiresApi(api = VERSION_CODES.M)
-    public void viewVisitantes(String d1, String d2, String d3){
+    public void viewVisitantes(String d1){
 
         Visitantes.forEach(n -> { if(n.getData().equals(d1)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
@@ -249,7 +315,7 @@ public class Main3Activity extends AppCompatActivity {
         }
         });
 
-        Visitantes.forEach(n -> { if(n.getData().equals(d2)) {
+        /*Visitantes.forEach(n -> { if(n.getData().equals(d2)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
                 mS4++;
             }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
@@ -262,9 +328,9 @@ public class Main3Activity extends AppCompatActivity {
                 mIns4++;
             }
         }
-        });
+        });*/
 
-        Visitantes.forEach(n -> { if(n.getData().equals(d3)) {
+        /*Visitantes.forEach(n -> { if(n.getData().equals(d3)) {
             if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
                 mS6++;
             }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
@@ -277,7 +343,7 @@ public class Main3Activity extends AppCompatActivity {
                 mIns6++;
             }
         }
-        });
+        });*/
 
         msatisfeitoR2.setText(String.valueOf(mS2));
         satisfeitoR2.setText(String.valueOf(s2));
@@ -285,7 +351,7 @@ public class Main3Activity extends AppCompatActivity {
         insatisfeitoR2.setText(String.valueOf(ins2));
         minsatisfeitoR2.setText(String.valueOf(mIns2));
 
-        msatisfeitoR4.setText(String.valueOf(mS4));
+        /*msatisfeitoR4.setText(String.valueOf(mS4));
         satisfeitoR4.setText(String.valueOf(s4));
         neutroR4.setText(String.valueOf(n4));
         insatisfeitoR4.setText(String.valueOf(ins4));
@@ -295,13 +361,20 @@ public class Main3Activity extends AppCompatActivity {
         satisfeitoR6.setText(String.valueOf(s6));
         neutroR6.setText(String.valueOf(n6));
         insatisfeitoR6.setText(String.valueOf(ins6));
-        minsatisfeitoR6.setText(String.valueOf(mIns6));
+        minsatisfeitoR6.setText(String.valueOf(mIns6));*/
     }
 
     @RequiresApi(api = VERSION_CODES.M)
     public void fillAllLists(){
         fillList(1); //expositor
         fillList(2); //visitante
+    }
+
+    // lista de datas do Spinner
+    @RequiresApi(api = VERSION_CODES.M)
+    public void fillAllListsSpinner(){
+        fillListSpinner(1); //expositor
+        fillListSpinner(2); //visitante
     }
 
     @RequiresApi(api = VERSION_CODES.M)
@@ -314,7 +387,7 @@ public class Main3Activity extends AppCompatActivity {
                 PostContract.PostEntry._ID,
                 PostContract.PostEntry.COLUMN_NAME_TIPO,
                 PostContract.PostEntry.COLUMN_NAME_VOTO,
-                PostContract.PostEntry.COLUMN_NAME_DATA
+                COLUMN_NAME_DATA
         };
 
         //clausula where
@@ -336,6 +409,44 @@ public class Main3Activity extends AppCompatActivity {
         while(!c.isAfterLast()){
             _pesquisa = fillPesquisa(c);
             EscolheLista(tipo);
+            c.moveToNext();
+        }
+    }
+
+    // lista para a ListBox (Spinner) das datas de pesquisa contidas no banco
+    @RequiresApi(api = VERSION_CODES.M)
+    public void fillListSpinner(int tipo){
+        PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        //variaveis que vai retornar da tabela
+        String[] projection = {
+                //PostContract.PostEntry.COLUMN_NAME_DATA
+                PostContract.PostEntry._ID,
+                PostContract.PostEntry.COLUMN_NAME_TIPO,
+                PostContract.PostEntry.COLUMN_NAME_VOTO,
+                COLUMN_NAME_DATA
+        };
+
+        //clausula where
+        EscolheSelect(tipo);
+
+        //busca dados no banco
+        Cursor c = db.query(
+                PostContract.PostEntry.TABLE_NAME,
+                projection,
+                selection,
+                null,
+                COLUMN_NAME_DATA,
+                null,
+                COLUMN_NAME_DATA);
+
+        c.moveToFirst();
+
+        //for each do cursor
+        while(!c.isAfterLast()){
+            _pesquisa = fillPesquisa(c);
+            EscolheListaParaSpinner(tipo);
             c.moveToNext();
         }
     }
@@ -363,41 +474,73 @@ public class Main3Activity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = VERSION_CODES.M)
+    public void EscolheListaParaSpinner(final int tipo){
+        switch (tipo){
+            case 1:
+                if(Datas.isEmpty()){
+                    Datas.add("");
+                }
+                if(Datas.contains(_pesquisa.data)){
+
+                }else{
+                    Datas.add(_pesquisa.data);
+                }
+                //Datas.add(_pesquisa.data.toString());
+                //Datas.add(_pesquisa.toString());
+                //Datas.add(_pesquisa);
+                break;
+            case 2:
+                if(Datas.isEmpty()){
+                    Datas.add("");
+                }
+                if(Datas.contains(_pesquisa.data)){
+
+                }else{
+                    Datas.add(_pesquisa.data);
+                }
+                //Datas.add(_pesquisa.data.toString());
+                //Datas.add(_pesquisa.toString());
+                //Datas.add(_pesquisa);
+                break;
+        }
+    }
+
     public void LimparView(){
         msatisfeitoR1.setText(""); mS1 = 0;
         msatisfeitoR2.setText(""); mS2 = 0;
-        msatisfeitoR3.setText(""); mS3 = 0;
+        /*msatisfeitoR3.setText(""); mS3 = 0;
         msatisfeitoR4.setText(""); mS4 = 0;
         msatisfeitoR5.setText(""); mS5 = 0;
-        msatisfeitoR6.setText(""); mS6 = 0;
+        msatisfeitoR6.setText(""); mS6 = 0;*/
 
         satisfeitoR1.setText(""); s1 = 0;
         satisfeitoR2.setText(""); s2 = 0;
-        satisfeitoR3.setText(""); s3 = 0;
+        /*satisfeitoR3.setText(""); s3 = 0;
         satisfeitoR4.setText(""); s4 = 0;
         satisfeitoR5.setText(""); s5 = 0;
-        satisfeitoR6.setText(""); s6 = 0;
+        satisfeitoR6.setText(""); s6 = 0;*/
 
         neutroR1.setText(""); n1 = 0;
         neutroR2.setText(""); n2 = 0;
-        neutroR3.setText(""); n3 = 0;
+        /*neutroR3.setText(""); n3 = 0;
         neutroR4.setText(""); n4 = 0;
         neutroR5.setText(""); n5 = 0;
-        neutroR6.setText(""); n6 = 0;
+        neutroR6.setText(""); n6 = 0;*/
 
         insatisfeitoR1.setText(""); ins1 = 0;
         insatisfeitoR2.setText(""); ins2 = 0;
-        insatisfeitoR3.setText(""); ins3 = 0;
+        /*insatisfeitoR3.setText(""); ins3 = 0;
         insatisfeitoR4.setText(""); ins4 = 0;
         insatisfeitoR5.setText(""); ins5 = 0;
-        insatisfeitoR6.setText(""); ins6 = 0;
+        insatisfeitoR6.setText(""); ins6 = 0;*/
 
         minsatisfeitoR1.setText(""); mIns1 = 0;
         minsatisfeitoR2.setText(""); mIns2 = 0;
-        minsatisfeitoR3.setText(""); mIns3 = 0;
+        /*minsatisfeitoR3.setText(""); mIns3 = 0;
         minsatisfeitoR4.setText(""); mIns4 = 0;
         minsatisfeitoR5.setText(""); mIns5 = 0;
-        minsatisfeitoR6.setText(""); mIns6 = 0;
+        minsatisfeitoR6.setText(""); mIns6 = 0;*/
 
     }
 
@@ -454,7 +597,7 @@ public class Main3Activity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_relatorio, menu);
         return true;
     }
 
@@ -466,11 +609,14 @@ public class Main3Activity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_pesquisa) {
+        /*if (id == R.id.action_pesquisa) {
             finish();
         }
         if (id == R.id.action_relatorio) {
 
+        }*/
+        if (id == R.id.action_voltar) {
+            finish();
         }
         if (id == R.id.action_limpar) {
             LimparDados();
@@ -496,13 +642,13 @@ public class Main3Activity extends AppCompatActivity {
                 LimparList();
                 LimparView();
 
-                Toast.makeText(Main3Activity.this, "Limpeza Concluida", Toast.LENGTH_SHORT).show();
+                makeText(Main3Activity.this, "Limpeza Concluida", LENGTH_SHORT).show();
             }
         });
         //define um botão como negativo.
         builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(Main3Activity.this, "Limpeza Cancelada", Toast.LENGTH_SHORT).show();
+                makeText(Main3Activity.this, "Limpeza Cancelada", LENGTH_SHORT).show();
             }
         });
         //cria o AlertDialog

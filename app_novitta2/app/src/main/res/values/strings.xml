@@ -6,4 +6,12 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_main3">Main3Activity</string>
     <string name="title_activity_main4">Main4Activity</string>
+
+
+    <string-array name="teste_de_spinner">
+        <item>26/06/2018</item>
+        <item>29/04/2018</item>
+        <item>06/05/2018</item>
+        <item>12/06/2018</item>
+    </string-array>
 </resources>

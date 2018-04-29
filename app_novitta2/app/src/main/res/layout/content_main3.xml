@@ -43,6 +43,28 @@
                     android:layout_weight="1"
                     android:src="@mipmap/ic_novita" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txvData"
+                    android:layout_width="179dp"
+                    android:layout_height="61dp"
+                    android:gravity="center"
+
+                    android:text="Selecione a Data:"
+                    android:textAlignment="center"
+                    android:textSize="18sp" />
+
+                <Spinner
+                    android:id="@+id/spinner_data"
+                    android:layout_width="179dp"
+                    android:layout_height="61dp"
+                    />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,16 +134,6 @@
                 android:orientation="vertical"
                 android:layout_margin="2dp">
 
-
-                <EditText
-                    android:id="@+id/data11"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:text="26/04/2018"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/holo_red_dark" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -242,301 +254,16 @@
                         android:textAlignment="center"
                         android:textSize="20dp" />
 
-
-
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/data2"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_margin="2dp"
-                    android:text="27/04/2018"
-                    android:textAlignment="center"
-                    android:textSize="18dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:layout_margin="2dp"
-                    android:orientation="horizontal"
-                    tools:background="@android:color/background_light">
-
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_expositor" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                    <TextView
-                        android:id="@+id/msatisfeitoR3"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/satisfeitoR3"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/neutroR3"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/insatisfeitoR3"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/minsatisfeitoR3"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:layout_margin="2dp"
-                    android:orientation="horizontal"
-                    tools:background="@android:color/background_light">
-
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_visitante" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                    <TextView
-                        android:id="@+id/msatisfeitoR4"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/satisfeitoR4"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/neutroR4"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/insatisfeitoR4"
-                        android:layout_width="60dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/minsatisfeitoR4"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/data3"
-                    android:layout_width="match_parent"
-                    android:layout_height="25dp"
-                    android:layout_margin="2dp"
-                    android:text="26/04/2018"
-                    android:textAlignment="center"
-                    android:textSize="18dp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:layout_margin="2dp"
-                    android:orientation="horizontal"
-                    tools:background="@android:color/background_light">
-
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_expositor" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                    <TextView
-                        android:id="@+id/msatisfeitoR5"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/satisfeitoR5"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/neutroR5"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/insatisfeitoR5"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/minsatisfeitoR5"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="57dp"
-                    android:layout_margin="2dp"
-                    android:orientation="horizontal"
-                    tools:background="@android:color/background_light">
-
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@mipmap/ic_visitante" />
-
-                    <ImageView
-                        android:layout_width="10dp"
-                        android:layout_height="10dp" />
-
-                    <TextView
-                        android:id="@+id/msatisfeitoR6"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/satisfeitoR6"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/neutroR6"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-                    <TextView
-                        android:id="@+id/insatisfeitoR6"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/minsatisfeitoR6"
-                        android:layout_width="57dp"
-                        android:layout_height="25dp"
-                        android:layout_gravity="center"
-                        android:textAlignment="center"
-                        android:textSize="20dp" />
-
-
-
-                </LinearLayout>
-
-
-
-
 
             </LinearLayout>
-
-
 
             </RelativeLayout>
 
         </ScrollView>
 
-
-
-
-
         </LinearLayout>
 
-
-
-
-
     </FrameLayout>
-
-
-
-
-
 
 </RelativeLayout>

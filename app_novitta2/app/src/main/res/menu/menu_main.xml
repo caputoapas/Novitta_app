@@ -3,11 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.caputo.app_novitta.MainActivity">
     <item
-        android:id="@+id/action_pesquisa"
-        android:orderInCategory="100"
-        android:title="Pesquisa"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/action_relatorio"
         android:orderInCategory="100"
         android:title="Relatório"
