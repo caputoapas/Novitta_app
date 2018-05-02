@@ -6,20 +6,21 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".Main2Activity"
-    tools:showIn="@layout/activity_main2">
+    tools:showIn="@layout/activity_main2"
+    android:background="#FFFFFF">
 
     <FrameLayout
         android:layout_width="200dp"
         android:layout_height="510dp"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        tools:background="@android:color/background_light">
+        android:background="#FFFFFF">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            tools:background="@android:color/background_light">
+            android:background="#FFFFFF">
 
             <TextView
                 android:id="@+id/Tipo"
@@ -37,6 +38,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="1dp"
                 android:onClick="Satisfeito"
+                android:background="#FFFFFF"
                 android:src="@mipmap/ic_msatisfeito" />
 
             <ImageView
@@ -46,6 +48,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="1dp"
                 android:onClick="Satisfeito"
+                android:background="#FFFFFF"
                 android:src="@mipmap/ic_satisfeito" />
 
             <ImageView
@@ -64,6 +67,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="2dp"
                 android:src="@mipmap/ic_insatisfeito"
+                android:background="#FFFFFF"
                 android:onClick="Insatisfeito"/>
 
             <ImageView
@@ -73,6 +77,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="2dp"
                 android:src="@mipmap/ic_minsatisfeito"
+                android:background="#FFFFFF"
                 android:onClick="Insatisfeito"/>
 
             <Button
