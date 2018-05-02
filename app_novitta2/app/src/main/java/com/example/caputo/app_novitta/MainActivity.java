@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import static android.widget.Toast.LENGTH_SHORT;
 import static android.widget.Toast.makeText;
 
@@ -88,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        /*if (id == R.id.action_pesquisa) {
-
-        }*/
         if (id == R.id.action_relatorio) {
             paginaRelatorio();
         }
@@ -117,11 +111,6 @@ public class MainActivity extends AppCompatActivity {
                 db.execSQL(String.format("DELETE FROM votacao"));
                 db.execSQL("VACUUM");
 
-                // CHAMA OS METODOS CRIADOS NA Main3Activity
-                Main3Activity limpar = new Main3Activity();
-                limpar.LimparList();
-                limpar.LimparView();
-
                 makeText(MainActivity.this, "Limpeza Concluida", LENGTH_SHORT).show();
             }
         });
@@ -135,7 +124,5 @@ public class MainActivity extends AppCompatActivity {
         alerta = builder.create();
         //Exibe
         alerta.show();
-
     }
-
 }
