@@ -229,139 +229,74 @@ public class Main3Activity extends AppCompatActivity {
 
     @SuppressLint("NewApi")
     @RequiresApi(api = VERSION_CODES.M)
-    public void viewExpositores(String d1){
+    public void viewExpositores(String d1)
+    {
 
-        Expositores.forEach(n -> { if(n.getData().equals(d1)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS1++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s1++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n1++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins1++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns1++;
+        for (Main2Activity.Pesquisa e : Expositores)
+        {
+
+            if(e.getData().equals(d1))
+            {
+                if(e.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito))
+                {
+                    mS1++;
+                }
+                else if(e.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito))
+                {
+                    s1++;
+                }
+                else if(e.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro))
+                {
+                    n1++;
+                }
+                else if(e.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito))
+                {
+                    ins1++;
+                }
+                else if(e.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito))
+                {
+                    mIns1++;
+                }
             }
         }
-        });
-
-
-        /*Expositores.forEach(n -> { if(n.getData().equals(d2)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS3++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s3++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n3++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins3++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns3++;
-            }
-        }
-        });*/
-
-        /*Expositores.forEach(n -> { if(n.getData().equals(d3)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS5++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s5++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n5++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins5++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns5++;
-            }
-        }
-        });*/
 
         msatisfeitoR1.setText(String.valueOf(mS1));
         satisfeitoR1.setText(String.valueOf(s1));
         neutroR1.setText(String.valueOf(n1));
         insatisfeitoR1.setText(String.valueOf(ins1));
         minsatisfeitoR1.setText(String.valueOf(mIns1));
-
-        /*msatisfeitoR3.setText(String.valueOf(mS3));
-        satisfeitoR3.setText(String.valueOf(s3));
-        neutroR3.setText(String.valueOf(n3));
-        insatisfeitoR3.setText(String.valueOf(ins3));
-        minsatisfeitoR3.setText(String.valueOf(mIns3));
-
-        msatisfeitoR5.setText(String.valueOf(mS5));
-        satisfeitoR5.setText(String.valueOf(s5));
-        neutroR5.setText(String.valueOf(n5));
-        insatisfeitoR5.setText(String.valueOf(ins5));
-        minsatisfeitoR5.setText(String.valueOf(mIns5));*/
     }
 
-    @SuppressLint("NewApi")
-    @RequiresApi(api = VERSION_CODES.M)
-    public void viewVisitantes(String d1){
-
-        Visitantes.forEach(n -> { if(n.getData().equals(d1)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS2++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s2++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n2++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins2++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns2++;
+    public void viewVisitantes(String d1)
+    {
+        for (Main2Activity.Pesquisa o : Visitantes)
+        {
+            if (o.getData().equals(d1))
+            {
+                if (o.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito))
+                {
+                    mS2++;
+                } else if (o.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito))
+                {
+                    s2++;
+                } else if (o.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro))
+                {
+                    n2++;
+                } else if (o.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito))
+                {
+                    ins2++;
+                } else if (o.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito))
+                {
+                    mIns2++;
+                }
             }
         }
-        });
-
-        /*Visitantes.forEach(n -> { if(n.getData().equals(d2)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS4++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s4++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n4++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins4++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns4++;
-            }
-        }
-        });*/
-
-        /*Visitantes.forEach(n -> { if(n.getData().equals(d3)) {
-            if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_satisfeito)){
-                mS6++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.satisfeito)){
-                s6++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.neutro)){
-                n6++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.insatisfeito)){
-                ins6++;
-            }else if(n.getSatisfacao().equals(Main2Activity.TipoSatisfacao.muito_insatisfeito)){
-                mIns6++;
-            }
-        }
-        });*/
 
         msatisfeitoR2.setText(String.valueOf(mS2));
         satisfeitoR2.setText(String.valueOf(s2));
         neutroR2.setText(String.valueOf(n2));
         insatisfeitoR2.setText(String.valueOf(ins2));
         minsatisfeitoR2.setText(String.valueOf(mIns2));
-
-        /*msatisfeitoR4.setText(String.valueOf(mS4));
-        satisfeitoR4.setText(String.valueOf(s4));
-        neutroR4.setText(String.valueOf(n4));
-        insatisfeitoR4.setText(String.valueOf(ins4));
-        minsatisfeitoR4.setText(String.valueOf(mIns4));
-
-        msatisfeitoR6.setText(String.valueOf(mS6));
-        satisfeitoR6.setText(String.valueOf(s6));
-        neutroR6.setText(String.valueOf(n6));
-        insatisfeitoR6.setText(String.valueOf(ins6));
-        minsatisfeitoR6.setText(String.valueOf(mIns6));*/
     }
 
     @RequiresApi(api = VERSION_CODES.M)
