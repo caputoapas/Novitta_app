@@ -13,6 +13,9 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
+
 // TELA PRINCIPAL EXPOSITOR/VISITANTE
 
 public class MainActivity extends AppCompatActivity {
@@ -109,25 +112,30 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 PostDbHelper mDbHelper = new PostDbHelper(getBaseContext());
-                SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
+                SQLiteDatabase db = mDbHelper.getReadableDatabase();
                 /** irá remover todos os registros **/
-//                db.execSQL(String.format("DELETE FROM ", "votacao"));
-//                db.execSQL("VACUUM");
+                db.execSQL(String.format("DELETE FROM votacao"));
+                db.execSQL("VACUUM");
 
-                Toast.makeText(MainActivity.this, "Limpeza Concluida", Toast.LENGTH_SHORT).show();
+                // CHAMA OS METODOS CRIADOS NA Main3Activity
+                Main3Activity limpar = new Main3Activity();
+                limpar.LimparList();
+                limpar.LimparView();
+
+                makeText(MainActivity.this, "Limpeza Concluida", LENGTH_SHORT).show();
             }
         });
         //define um botão como negativo.
         builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(MainActivity.this, "Limpeza Cancelada", Toast.LENGTH_SHORT).show();
+                makeText(MainActivity.this, "Limpeza Cancelada", LENGTH_SHORT).show();
             }
         });
         //cria o AlertDialog
         alerta = builder.create();
         //Exibe
         alerta.show();
+
     }
 
 }
