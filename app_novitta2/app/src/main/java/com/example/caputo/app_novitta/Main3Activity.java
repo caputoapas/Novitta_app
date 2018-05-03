@@ -92,7 +92,8 @@ public class Main3Activity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                 // no lugar do Toast abiaxo, colocar a função do cursor para realizar a pesquisa.
-                Toast.makeText(Main3Activity.this, Datas.get(position), Toast.LENGTH_LONG).show();
+                if(!Datas.get(position).isEmpty())
+                    Toast.makeText(Main3Activity.this, Datas.get(position), Toast.LENGTH_SHORT).show();
 
                 LimparView();
 
